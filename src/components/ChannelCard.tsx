@@ -8,9 +8,9 @@ interface Props {
 
 export default function ChannelCard({ channel }: Props): ReactElement {
   return (
-    <Flex width="100%" flexGrow={1} minHeight="200px" height="100%">
+    <Flex width="100%" flexGrow={1}   flex="1 0 auto">
       {channel.logo ? (
-        <img src={channel.logo} alt={channel.name} loading="lazy" />
+        <img src={channel.logo} alt={channel.name} loading="lazy" width="100%" style={{height:"100%!important"}} />
       ) : (
         <Flex
           p="4"
@@ -23,7 +23,7 @@ export default function ChannelCard({ channel }: Props): ReactElement {
           fontSize="4xl"
           flexGrow={1}
           width="100%"
-          height="100%"
+          height="auto"
         >
           {channel.name}
         </Flex>

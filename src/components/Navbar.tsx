@@ -8,7 +8,7 @@ export default function Navbar(): ReactElement {
   return (
     <Flex>
       <Link to="/" style={{width:"100%"}}><Flex p="2" justifyContent="center" width="full">
-        <img src="/logo.png" width="200px" alt="Dash TV Logo" />
+        <img src="/logo.png"  width="35%" height="auto" alt="Dash TV Logo" />
       </Flex></Link>
     </Flex>
   );
