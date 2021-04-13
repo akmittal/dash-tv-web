@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { fetchData, getLanguages } from "./utils";
 import { SettingsIcon } from "@chakra-ui/icons";
@@ -42,7 +42,7 @@ export const App = () => {
   if (isLoading) return <Spinner />;
 
   if (error) return <>'An error has occurred: ' + error.message</>;
-  
+
   return (
     <ChakraProvider theme={theme}>
        <Router>
