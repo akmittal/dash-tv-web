@@ -58,7 +58,7 @@ export default function Watch(): ReactElement {
       </Helmet>
 
       <video-js
-        style={{ width: "100%" }}
+        style={{ width: "100%", minHeight:"400px" }}
         id="video"
         autoPlay
         src={decodeURIComponent(params.url)}
