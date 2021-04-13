@@ -10,7 +10,7 @@ export default function ChannelCard({ channel }: Props): ReactElement {
   return (
     <Flex width="100%" flexGrow={1} minHeight="200px" height="100%">
       {channel.logo ? (
-        <img src={channel.logo} alt={channel.name} />
+        <img src={channel.logo} alt={channel.name} loading="lazy" />
       ) : (
         <Flex
           p="4"
