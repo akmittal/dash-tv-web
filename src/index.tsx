@@ -19,7 +19,7 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-queryClient.prefetchQuery("data", fetchData);
+queryClient.prefetchQuery("data", fetchData, {cacheTime: 60 * 60 * 1000});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
