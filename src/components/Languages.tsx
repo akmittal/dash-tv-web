@@ -36,12 +36,13 @@ export default function Languages({
         <ModalBody>
           {languages.map((language) => (
             <Badge
+            cursor="pointer"
               m="1"
               p="2"
               background={
                 selectedLanguages.includes(language.name)
                   ? "pink.600"
-                  : "whiteAlpha.100"
+                  : "whiteAlpha.300"
               }
               borderRadius="3xl"
               onClick={() => toggleSelect(language.name)}

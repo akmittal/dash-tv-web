@@ -22,7 +22,7 @@ const preSelectedLanguages = localStorage.getItem("selected-languages");
 
 export const App = () => {
   const [selectedLanguages, setSelectedLanguages] = React.useState<string[]>(
-    preSelectedLanguages ? JSON.parse(preSelectedLanguages) : []
+    preSelectedLanguages ? JSON.parse(preSelectedLanguages) : ["English"]
   );
   const [showLanguagesModal, setShowLanguagesModal] = React.useState<boolean>(
     !preSelectedLanguages
