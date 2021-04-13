@@ -1,12 +1,12 @@
 import { Flex } from "@chakra-ui/layout";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect} from "react";
 import { useParams } from "react-router";
 import videojs from "video.js";
 import Helmet from "react-helmet";
 import { Spinner } from "@chakra-ui/spinner";
 import { useQuery } from "react-query";
 import { Channel, fetchData } from "../utils";
-import { FaPlayCircle } from "react-icons/fa";
+
 
 declare global {
   namespace JSX {
@@ -23,12 +23,12 @@ interface ParamTypes {
   url: string;
 }
 
-interface Props {}
+
 
 const getChannel = (data: Channel[], url: string) =>
   data.find((channel: Channel) => channel.url === decodeURIComponent(url));
 
-export default function Watch({}: Props): ReactElement {
+export default function Watch(): ReactElement {
   const params = useParams<ParamTypes>();
   const { isLoading, error, data } = useQuery("data", fetchData);
 
