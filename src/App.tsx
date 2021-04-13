@@ -4,11 +4,12 @@ import {
   ChakraProvider,
   Box,
   Grid,
-  theme,
+
   Spinner,
   Flex,
   IconButton,
 } from "@chakra-ui/react";
+import theme from "./theme";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -45,34 +46,31 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-       <Router>
-      <Box fontSize="xl">
-        <Navbar />
-        <Languages
-          selectedLanguages={selectedLanguages}
-          toggleSelect={toggleLanguage}
-          languages={getLanguages(data)}
-          isOpen={showLanguagesModal}
-          onClose={() => setShowLanguagesModal(false)}
-        />
-        <Grid p={3}>
-          <Flex justifyContent="flex-end">
-            <IconButton
-              size="md"
-              aria-label="settings"
-              variant="ghost"
-              color="current"
-              marginLeft="2"
-              icon={<SettingsIcon />}
-              onClick={() => setShowLanguagesModal(true)}
-            ></IconButton>
-            <ColorModeSwitcher />
-          </Flex>
+      <Router>
+        <Box fontSize="xl">
+          <Navbar />
+          <Languages
+            selectedLanguages={selectedLanguages}
+            toggleSelect={toggleLanguage}
+            languages={getLanguages(data)}
+            isOpen={showLanguagesModal}
+            onClose={() => setShowLanguagesModal(false)}
+          />
+          <Grid p={3}>
+            <Flex justifyContent="flex-end">
+              <IconButton
+                size="md"
+                aria-label="settings"
+                variant="ghost"
+                color="current"
+                marginLeft="2"
+                icon={<SettingsIcon />}
+                onClick={() => setShowLanguagesModal(true)}
+              ></IconButton>
+              <ColorModeSwitcher />
+            </Flex>
 
-         
-           
             <Switch>
-             
               <Route path="/watch/:url">
                 <Watch />
               </Route>
@@ -80,9 +78,9 @@ export const App = () => {
                 <Home selectedLanguages={selectedLanguages} />
               </Route>
             </Switch>
-        
-        </Grid>
-      </Box></Router>
+          </Grid>
+        </Box>
+      </Router>
     </ChakraProvider>
   );
 };

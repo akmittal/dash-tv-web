@@ -42,7 +42,7 @@ export default function Languages({
               background={
                 selectedLanguages.includes(language.name)
                   ? "pink.600"
-                  : "whiteAlpha.300"
+                  : "blackAlpha.100"
               }
               borderRadius="3xl"
               onClick={() => toggleSelect(language.name)}
