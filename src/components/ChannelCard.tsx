@@ -8,7 +8,7 @@ interface Props {
 
 export default function ChannelCard({ channel }: Props): ReactElement {
   return (
-    <Flex width="100%" flexGrow={1}   flex="1 0 auto" style={{contentVisibility:"auto"}}>
+    <Flex width="100%" flexGrow={1}   flex="1 0 auto">
       {channel.logo ? (
         <img src={channel.logo} alt={channel.name} loading="lazy" width="100%" style={{height:"100%!important"}} />
       ) : (
