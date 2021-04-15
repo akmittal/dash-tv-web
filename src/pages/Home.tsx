@@ -36,6 +36,7 @@ export default function Home({selectedLanguages}: Props): ReactElement {
       {getCategories(data, selectedLanguages).map((category) => (
         <Category
           name={category}
+          key={category}
           channels={getChannelByCategory(data, category, selectedLanguages)}
         />
       ))}

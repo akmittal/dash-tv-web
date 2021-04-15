@@ -35,7 +35,7 @@ export default function Languages({
         <ModalCloseButton />
         <ModalBody>
           {languages.map((language) => (
-            <Badge
+            <Badge key={language.code}
             cursor="pointer"
               m="1"
               p="2"

@@ -35,7 +35,11 @@ export const getCategories = (data: Channel[], languages: string[]) => {
   return Array.from(
     new Set(
       data
-        .filter((channel) => channel.category !== "XXX" && channelIncudesLanguage(channel, languages))
+        .filter(
+          (channel) =>
+            channel.category !== "XXX" &&
+            channelIncudesLanguage(channel, languages)
+        )
         .map((channel) => channel.category)
     )
   );
@@ -46,10 +50,12 @@ export const getChannelByCategory = (
   category: string,
   languages: string[]
 ) => {
-  return data
-   
-    .filter((channel) => channel.category !== "XXX" && channel.category === category &&channelIncudesLanguage(channel, languages))
-  
+  return data.filter(
+    (channel) =>
+      channel.category !== "XXX" &&
+      channel.category === category &&
+      channelIncudesLanguage(channel, languages)
+  );
 };
 
 export const getLanguages = (channels: Channel[]): Language[] => {
