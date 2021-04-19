@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "node-fetch": "^2.6.1"
   }
 }

@@ -21,6 +21,9 @@ const Watch = React.lazy(() => import("./pages/Watch"));
 const Home = React.lazy(() => import("./pages/Home"));
 
 const preSelectedLanguages = localStorage.getItem("selected-languages");
+if(!preSelectedLanguages){
+  localStorage.setItem("selected-languages",JSON.stringify(["English"]));
+}
 
 export const App = () => {
   const [selectedLanguages, setSelectedLanguages] = React.useState<string[]>(
