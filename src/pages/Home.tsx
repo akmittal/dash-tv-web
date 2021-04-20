@@ -20,7 +20,9 @@ interface Props {
 
 export default function Home({selectedLanguages}: Props): ReactElement {
   
-  const { isLoading, error, data } = useQuery("data", fetchData);
+  const { isLoading, error, data } = useQuery("data", fetchData, {
+    staleTime: 1000 * 60 * 60,
+  });
   if (isLoading) return <Spinner />;
 
   if (error) return <>'An error has occurred: ' + error.message</>;

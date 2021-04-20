@@ -30,7 +30,9 @@ const getChannel = (data: Channel[], url: string) =>
 
 export default function Watch(): ReactElement {
   const params = useParams<ParamTypes>();
-  const { isLoading, error, data } = useQuery("data", fetchData);
+  const { isLoading, error, data } = useQuery("data", fetchData, {
+    staleTime: 1000 * 60 * 60,
+  });
 
   useEffect(() => {
       let player:videojs.Player;
