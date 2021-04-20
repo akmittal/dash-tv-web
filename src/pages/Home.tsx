@@ -31,7 +31,7 @@ export default function Home({selectedLanguages}: Props): ReactElement {
   if (error) return <>'An error has occurred: ' + error.message</>;
 
   return (
-    <div>
+    <>
        <Helmet>
         <title>Watch 5000+ TV channels live Free </title>
         <meta name="description" content="Helmet application" />
@@ -45,6 +45,6 @@ export default function Home({selectedLanguages}: Props): ReactElement {
           channels={getChannelByCategory(data, category, selectedLanguages)}
         />
       ))}
-    </div>
+    </>
   );
 }

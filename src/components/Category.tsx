@@ -11,7 +11,7 @@ interface Props {
 
 export default function Category({ name, channels }: Props): ReactElement {
   return (
-    <div  style={{contentVisibility:"auto"}}>
+    <>
       <Heading>{!name ? "Other" : name}</Heading>
       <Flex wrap="wrap">
         {channels.map((channel) => (
@@ -25,6 +25,6 @@ export default function Category({ name, channels }: Props): ReactElement {
           </Flex>
         ))}
       </Flex>
-    </div>
+    </>
   );
 }
