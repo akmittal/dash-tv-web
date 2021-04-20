@@ -29,7 +29,19 @@
     "shaka-player-react": "^1.1.2",
     "typescript": "^3.9.5",
     "video.js": "^7.11.8",
-    "web-vitals": "^0.2.2"
+    "web-vitals": "^0.2.2",
+    "workbox-background-sync": "^5.1.3",
+    "workbox-broadcast-update": "^5.1.3",
+    "workbox-cacheable-response": "^5.1.3",
+    "workbox-core": "^5.1.3",
+    "workbox-expiration": "^5.1.3",
+    "workbox-google-analytics": "^5.1.3",
+    "workbox-navigation-preload": "^5.1.3",
+    "workbox-precaching": "^5.1.3",
+    "workbox-range-requests": "^5.1.3",
+    "workbox-routing": "^5.1.3",
+    "workbox-strategies": "^5.1.3",
+    "workbox-streams": "^5.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
