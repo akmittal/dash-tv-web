@@ -52,9 +52,9 @@ export const getChannelByCategory = (
 ) => {
   return data.filter(
     (channel) =>
-      channel.category !== "XXX" &&
       channel.category === category &&
-      channelIncudesLanguage(channel, languages)
+      channelIncudesLanguage(channel, languages) &&
+      channel.category !== "XXX"
   );
 };
 

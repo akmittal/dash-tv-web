@@ -1,6 +1,6 @@
 
 import { Spinner } from "@chakra-ui/spinner";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useMemo } from "react";
 import { useQuery } from "react-query";
 import Category from "../components/Category";
 
@@ -23,6 +23,9 @@ export default function Home({selectedLanguages}: Props): ReactElement {
   const { isLoading, error, data } = useQuery("data", fetchData, {
     staleTime: 1000 * 60 * 60,
   });
+
+  const categories = useMemo(() => getCategories(data, selectedLanguages), [data, selectedLanguages]);
+
   if (isLoading) return <Spinner />;
 
   if (error) return <>'An error has occurred: ' + error.message</>;
@@ -35,7 +38,7 @@ export default function Home({selectedLanguages}: Props): ReactElement {
     </Helmet>
       
      
-      {getCategories(data, selectedLanguages).map((category) => (
+      {categories.map((category) => (
         <Category
           name={category}
           key={category}
