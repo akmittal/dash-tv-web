@@ -23,17 +23,9 @@
     -->
     <title>DASH TV - Watch Live TV channels Free</title>
     <link
-      href="https://vjs.zencdn.net/7.11.4/video-js.min.css"
+      href="https://unpkg.com/video.js@7.11.8/dist/video-js.min.css"
       rel="stylesheet"
     />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0M3V9ZZBQ0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0M3V9ZZBQ0');
-</script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -49,4 +41,17 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-0M3V9ZZBQ0"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-0M3V9ZZBQ0");
+  </script>
 </html>

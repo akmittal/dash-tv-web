@@ -49,7 +49,7 @@ export default function Watch(): ReactElement {
 
   return (
     <Flex>
-      <Helmet script={[{src:"https://vjs.zencdn.net/7.11.4/video.min.js"},{src:"https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js"}]}>
+      <Helmet script={[{src:"https://unpkg.com/video.js@7.11.8/dist/video.min.js"},{src:"https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js"}]}>
         <title>
           Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
           Free{" "}
