@@ -34,7 +34,11 @@ export default function Home({selectedLanguages}: Props): ReactElement {
     <>
        <Helmet>
         <title>Watch 5000+ TV channels live Free </title>
-        <meta name="description" content="Helmet application" />
+        <meta name="description" content="Watch TV channels live for free" />
+        <meta
+          name="keywords"
+          content="watch tv, tv channels, stream, free tv, AAJ tak, HBO, 9XM"
+        />
     </Helmet>
       
      
