@@ -50,7 +50,7 @@ export default function Watch(): ReactElement {
   if (error) return <>'An error has occurred: ' + error.message</>;
 
   return (
-    <Flex>
+    <Flex direction="column" gridGap="2">
       <Helmet script={[{src:"https://unpkg.com/video.js@7.11.8/dist/video.min.js"},{src:"https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js"}]}>
         <title>
           Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
@@ -72,6 +72,10 @@ export default function Watch(): ReactElement {
           type="application/x-mpegURL"
         />
       </video-js>
+      <Flex gridGap="2">
+        <img src={getChannel(data, decodeURIComponent(params.url))?.logo} width="50" />
+      <h5>Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
+          Free</h5></Flex>
     </Flex>
   );
 }
