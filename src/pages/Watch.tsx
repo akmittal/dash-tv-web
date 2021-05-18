@@ -1,12 +1,11 @@
 import { Flex } from "@chakra-ui/layout";
-import React, { ReactElement, useEffect} from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useParams } from "react-router";
 import videojs from "video.js";
 import Helmet from "react-helmet";
 import { Spinner } from "@chakra-ui/spinner";
 import { useQuery } from "react-query";
 import { Channel, fetchData } from "../utils";
-
 
 declare global {
   namespace JSX {
@@ -23,8 +22,6 @@ interface ParamTypes {
   url: string;
 }
 
-
-
 const getChannel = (data: Channel[], url: string) =>
   data.find((channel: Channel) => channel.url === decodeURIComponent(url));
 
@@ -35,14 +32,13 @@ export default function Watch(): ReactElement {
   });
 
   useEffect(() => {
-      let player:videojs.Player;
+    let player: videojs.Player;
     if (data) {
-
-       player = videojs("video");
+      player = videojs("video");
     }
     return () => {
-        player.dispose();
-    }
+      player.dispose();
+    };
   }, [data, params.url]);
 
   if (isLoading) return <Spinner />;
@@ -51,7 +47,14 @@ export default function Watch(): ReactElement {
 
   return (
     <Flex direction="column" gridGap="2">
-      <Helmet script={[{src:"https://unpkg.com/video.js@7.11.8/dist/video.min.js"},{src:"https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js"}]}>
+      <Helmet
+        script={[
+          { src: "https://unpkg.com/video.js@7.11.8/dist/video.min.js" },
+          {
+            src: "https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js",
+          },
+        ]}
+      >
         <title>
           Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
           Free{" "}
@@ -60,7 +63,7 @@ export default function Watch(): ReactElement {
       </Helmet>
 
       <video-js
-        style={{ width: "100%", minHeight:"400px" }}
+        style={{ width: "100%", minHeight: "400px" }}
         id="video"
         autoPlay
         src={decodeURIComponent(params.url)}
@@ -73,9 +76,16 @@ export default function Watch(): ReactElement {
         />
       </video-js>
       <Flex gridGap="2">
-        <img src={getChannel(data, decodeURIComponent(params.url))?.logo} width="50" />
-      <h5>Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
-          Free</h5></Flex>
+        <img
+          src={getChannel(data, decodeURIComponent(params.url))?.logo} alt={getChannel(data, decodeURIComponent(params.url))?.name}
+          
+          width="50"
+        />
+        <h5>
+          Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
+          Free
+        </h5>
+      </Flex>
     </Flex>
   );
 }
