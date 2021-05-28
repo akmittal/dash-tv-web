@@ -12,7 +12,6 @@ interface Props {
 export default function Category({ name, channels }: Props): ReactElement {
   return (
     <>
-      <Heading>{!name ? "Other" : name}</Heading>
       <Flex wrap="wrap">
         {channels.map((channel) => (
           <Flex flex={["50%", "33%", "25%"]} p="5" key={channel.name}>

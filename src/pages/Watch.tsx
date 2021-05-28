@@ -1,11 +1,13 @@
-import { Flex } from "@chakra-ui/layout";
+import { Flex, VStack } from "@chakra-ui/layout";
 import React, { ReactElement, useEffect } from "react";
 import { useParams } from "react-router";
 import videojs from "video.js";
 import Helmet from "react-helmet";
 import { Spinner } from "@chakra-ui/spinner";
+import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { Channel, fetchData } from "../utils";
+import { Link } from "react-router-dom";
 
 declare global {
   namespace JSX {
@@ -44,6 +46,7 @@ export default function Watch(): ReactElement {
   if (isLoading) return <Spinner />;
 
   if (error) return <>'An error has occurred: ' + error.message</>;
+  const channel = getChannel(data, decodeURIComponent(params.url));
 
   return (
     <Flex direction="column" gridGap="2">
@@ -55,11 +58,8 @@ export default function Watch(): ReactElement {
           },
         ]}
       >
-        <title>
-          Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
-          Free{" "}
-        </title>
-        <meta name="description" content="Helmet application" />
+        <title>Watch {channel?.name} live Free </title>
+        <meta name="description" content={`Watch ${channel?.name} live in HD quality`} />
       </Helmet>
 
       <video-js
@@ -76,16 +76,45 @@ export default function Watch(): ReactElement {
         />
       </video-js>
       <Flex gridGap="2">
-        <img
-          src={getChannel(data, decodeURIComponent(params.url))?.logo} alt={getChannel(data, decodeURIComponent(params.url))?.name}
-          
-          width="50"
-        />
-        <h5>
-          Watch {getChannel(data, decodeURIComponent(params.url))?.name} live
-          Free
-        </h5>
+        <img src={channel?.logo} alt={channel?.name} width="50" />
+        <h5>Watch {channel?.name} live Free</h5>
       </Flex>
+      <VStack alignItems="flex-start">
+        {channel?.category && (
+          <Flex gridGap="1">
+            <strong>Category: </strong>
+            <p>
+              <ChakraLink
+                color="blue.400"
+                to={`/category/${
+                  channel ? encodeURIComponent(channel.category) : ""
+                }`}
+                as={Link}
+              >
+                {channel?.category}
+              </ChakraLink>
+            </p>
+          </Flex>
+        )}
+        <Flex gridGap="1">
+          <strong>Languages: </strong>
+          <p>
+            {channel?.languages.reduce(
+              (acc, language) => acc + language?.name + ", ",
+              ""
+            )}
+          </p>
+        </Flex>
+        <Flex gridGap="1">
+          <strong>Countries: </strong>
+          <p>
+            {channel?.countries.reduce(
+              (acc, country) => acc + country?.name + ", ",
+              ""
+            )}
+          </p>
+        </Flex>
+      </VStack>
     </Flex>
   );
 }
