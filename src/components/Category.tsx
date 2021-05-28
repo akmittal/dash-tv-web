@@ -1,4 +1,4 @@
-import { Flex, Heading } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Channel } from "./../utils";

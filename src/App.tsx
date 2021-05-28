@@ -16,7 +16,8 @@ import { fetchData, getLanguages } from "./utils";
 import { SettingsIcon } from "@chakra-ui/icons";
 import Languages from "./components/Languages";
 import "./App.css";
-import CategoryPage from "./pages/Category";
+
+const CategoryPage = React.lazy(() => import("./pages/Category"));
 
 const Watch = React.lazy(() => import("./pages/Watch"));
 const Home = React.lazy(() => import("./pages/Home"));
