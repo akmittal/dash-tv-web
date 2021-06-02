@@ -2,6 +2,8 @@ import { Flex } from "@chakra-ui/layout";
 import React, { ReactElement } from "react";
 import { Channel } from "../utils";
 
+
+
 interface Props {
   channel: Channel;
 }

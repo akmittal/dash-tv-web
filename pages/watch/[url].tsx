@@ -5,9 +5,9 @@ import Helmet from "react-helmet";
 import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { Channel, fetchData } from "../utils";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { Channel, fetchData } from "../../src/utils";
+import Link from "next/link"
+import {useRouter} from "next/router"
 
 declare global {
   namespace JSX {
@@ -27,16 +27,13 @@ interface ParamTypes {
 const getChannel = (data: Channel[], url: string) =>
   data.find((channel: Channel) => channel.url === decodeURIComponent(url));
 
-export default function Watch(): ReactElement {
+export default function Watch({data}): ReactElement {
   const router = useRouter();
-  let { url } = router.query;
-  if (Array.isArray(url)) {
+  let {url} = router.query;
+  if(Array.isArray(url)){
     url = url[0];
   }
-  const { isLoading, error, data } = useQuery("data", fetchData, {
-    staleTime: 1000 * 60 * 60,
-  });
-
+ 
   useEffect(() => {
     let player: videojs.Player;
     if (data) {
@@ -47,9 +44,7 @@ export default function Watch(): ReactElement {
     };
   }, [data, url]);
 
-  if (isLoading) return <Spinner />;
-
-  if (error) return <>'An error has occurred: ' + error.message</>;
+ 
   const channel = getChannel(data, decodeURIComponent(url));
 
   return (
@@ -63,10 +58,7 @@ export default function Watch(): ReactElement {
         ]}
       >
         <title>Watch {channel?.name} live Free </title>
-        <meta
-          name="description"
-          content={`Watch ${channel?.name} live in HD quality`}
-        />
+        <meta name="description" content={`Watch ${channel?.name} live in HD quality`} />
       </Helmet>
 
       <video-js
@@ -77,7 +69,10 @@ export default function Watch(): ReactElement {
         controls
         className="vjs-default-skin"
       >
-        <source src={decodeURIComponent(url)} type="application/x-mpegURL" />
+        <source
+          src={decodeURIComponent(url)}
+          type="application/x-mpegURL"
+        />
       </video-js>
       <Flex gridGap="2">
         <img src={channel?.logo} alt={channel?.name} width="50" />

@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import theme from "./theme";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { fetchData, getLanguages } from "./utils";
 import { SettingsIcon } from "@chakra-ui/icons";

@@ -1,9 +1,9 @@
 import { Spinner } from "@chakra-ui/spinner";
 import React, { ReactElement } from "react";
 import { useQuery } from "react-query";
-import Category from "../components/Category";
+import Category from "../../src/components/Category";
 
-import { fetchData, getChannelByCategory } from "../utils";
+import { fetchData, getChannelByCategory } from "../../src/utils";
 
 import { Helmet } from "react-helmet";
 
@@ -13,27 +13,21 @@ import { useRouter } from "next/router";
 
 interface Props {
   selectedLanguages: string[];
+  data:any
 }
 interface Params {
   name: string;
 }
 
 export default function CategoryPage({
-  selectedLanguages,
+  selectedLanguages,data
 }: Props): ReactElement {
-  const { isLoading, error, data } = useQuery("data", fetchData, {
-    staleTime: 1000 * 60 * 60,
-  });
 
   const router = useRouter();
   let {name:category} = router.query;
   if(Array.isArray(category)){
     category = category[0];
   }
-
-  if (isLoading) return <Spinner />;
-
-  if (error) return <>'An error has occurred: ' + error.message</>;
 
   return (
     <>
