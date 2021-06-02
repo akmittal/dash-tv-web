@@ -84,7 +84,7 @@ export const App = () => {
                   <CategoryPage  selectedLanguages={selectedLanguages} />
                 </Route>
                 <Route path="/watch/:url">
-                  <Watch />
+                  <Watch selectedLanguages={selectedLanguages} />
                 </Route>
                 <Route path="/">
                   <Home selectedLanguages={selectedLanguages} />

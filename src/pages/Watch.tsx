@@ -1,13 +1,14 @@
-import { Flex, VStack } from "@chakra-ui/layout";
-import React, { ReactElement, useEffect } from "react";
+import { Divider, Flex, Heading, VStack } from "@chakra-ui/layout";
+import React, { createRef, ReactElement, useEffect } from "react";
 import { useParams } from "react-router";
 import videojs from "video.js";
 import Helmet from "react-helmet";
 import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { Channel, fetchData } from "../utils";
+import { Channel, fetchData, getChannelByCategory } from "../utils";
 import { Link } from "react-router-dom";
+import Category from "./../components/Category"
 
 declare global {
   namespace JSX {
@@ -24,45 +25,55 @@ interface ParamTypes {
   url: string;
 }
 
+interface Props{
+  selectedLanguages: string[];
+}
 const getChannel = (data: Channel[], url: string) =>
   data.find((channel: Channel) => channel.url === decodeURIComponent(url));
 
-export default function Watch(): ReactElement {
+export default function Watch({ selectedLanguages }: Props): ReactElement {
   const params = useParams<ParamTypes>();
   const { isLoading, error, data } = useQuery("data", fetchData, {
     staleTime: 1000 * 60 * 60,
   });
+  const videoRef = createRef<HTMLElement>();
+  useEffect(() => {
+    const player = videojs.getPlayer("video")
+    if(player){
+      player.dispose();
+    }
+  },[])
 
   useEffect(() => {
+    const channel = getChannel(data, decodeURIComponent(params.url));
     let player: videojs.Player;
-    if (data) {
-      player = videojs("video");
+    if (data && videoRef.current) {
+      player = videojs("video", {}, () => {
+        player.src({src: channel?.url||"", type:"application/x-mpegURL"});
+      });
     }
     return () => {
-      player.dispose();
+      // player.reset()
+     
     };
-  }, [data, params.url]);
+  }, [data, params.url, videoRef]);
 
   if (isLoading) return <Spinner />;
 
   if (error) return <>'An error has occurred: ' + error.message</>;
   const channel = getChannel(data, decodeURIComponent(params.url));
 
+
   return (
     <Flex direction="column" gridGap="2">
       <Helmet
-        script={[
-          { src: "https://unpkg.com/video.js@7.11.8/dist/video.min.js" },
-          {
-            src: "https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js",
-          },
-        ]}
+        
       >
         <title>Watch {channel?.name} live Free </title>
         <meta name="description" content={`Watch ${channel?.name} live in HD quality`} />
       </Helmet>
-
-      <video-js
+      
+      <video-js ref={videoRef}
         style={{ width: "100%", minHeight: "400px" }}
         id="video"
         autoPlay
@@ -114,6 +125,16 @@ export default function Watch(): ReactElement {
             )}
           </p>
         </Flex>
+      </VStack>
+      <VStack mt="50">
+        <Heading alignSelf="flex-start">Related Channels</Heading>
+        <Divider />
+        <Category
+        name={channel?.category||""}
+        key={channel?.category}
+        channels={getChannelByCategory(data, channel?.category||"",selectedLanguages ).slice(0,8)}
+      />
+       
       </VStack>
     </Flex>
   );
