@@ -37,7 +37,7 @@ export default function Home({ selectedLanguages }: Props): ReactElement {
         />
       </Helmet>
       <Tabs width="calc(100vw - 20px)" overflow="hidden">
-        <TabList overflow="scroll" style={{scrollbarWidth:"none"}}>
+        <TabList overflow="scroll" style={{scrollbarWidth:"none", padding:"3px"}}>
           {categories.map((category) => (
             <Tab>{!category ? "Other" : category}</Tab>
           ))}

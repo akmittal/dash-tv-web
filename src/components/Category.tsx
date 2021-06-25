@@ -14,7 +14,7 @@ export default function Category({ name, channels }: Props): ReactElement {
     <>
       <Flex wrap="wrap">
         {channels.map((channel) => (
-          <Flex flex={["50%", "33%", "25%"]} p="5" key={channel.name}>
+          <Flex flex={["50%", "33%", "25%"]} p="5" key={channel.url}>
             <Link
               href={`/watch/${encodeURIComponent(channel.url)}`}
             
