@@ -30,7 +30,7 @@ export default function CategoryPage({
 
   if (isLoading) return <Spinner />;
 
-  if (error) return <>'An error has occurred: ' + error.message</>;
+  if (error) return <>{error?.message}</>;
 
   return (
     <>

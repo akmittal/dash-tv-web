@@ -6,8 +6,8 @@ import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { Channel, fetchData, getChannelByCategory } from "../../src/utils";
-import Link  from "next/link";
-import Category from "./../../src/components/Category"
+import Link from "next/link";
+import Category from "./../../src/components/Category";
 import { useRouter } from "next/router";
 
 declare global {
@@ -25,59 +25,64 @@ interface ParamTypes {
   url: string;
 }
 
-interface Props{
+interface Props {
   selectedLanguages: string[];
-  data?:any
+  data?: any;
 }
 const getChannel = (data: Channel[], url: string) =>
   data.find((channel: Channel) => channel.url === decodeURIComponent(url));
 
-export default function Watch({ selectedLanguages=["English"], data:initialData }: Props): ReactElement {
-  console.log({initialData})
+export default function Watch({
+  selectedLanguages = ["English"],
+  data: initialData,
+}: Props): ReactElement {
+  console.log({ initialData });
   const router = useRouter();
-  const url = Array.isArray(router.query.url)?router.query.url[0]:router.query.url
+  const url = Array.isArray(router.query.url)
+    ? router.query.url[0]
+    : router.query.url;
   const { isLoading, error, data } = useQuery("data", fetchData, {
     initialData,
     staleTime: 1000 * 60 * 60,
   });
   const videoRef = createRef<HTMLElement>();
   useEffect(() => {
-    const player = videojs.getPlayer("video")
-    if(player){
+    const player = videojs.getPlayer("video");
+    if (player) {
       player.dispose();
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     const channel = getChannel(data, decodeURIComponent(url));
     let player: videojs.Player;
     if (data && videoRef.current) {
       player = videojs("video", {}, () => {
-        player.src({src: channel?.url||"", type:"application/x-mpegURL"});
+        player.src({ src: channel?.url || "", type: "application/x-mpegURL" });
       });
     }
     return () => {
       // player.reset()
-     
     };
   }, [data, url, videoRef]);
 
   if (isLoading) return <Spinner />;
 
-  if (error) return <>'An error has occurred: ' + error.message</>;
+  if (error) return <>{ error?.message}</>;
   const channel = getChannel(data, decodeURIComponent(url));
-
 
   return (
     <Flex direction="column" gridGap="2">
-      <Helmet
-        
-      >
+      <Helmet>
         <title>Watch {channel?.name} live Free </title>
-        <meta name="description" content={`Watch ${channel?.name} live in HD quality`} />
+        <meta
+          name="description"
+          content={`Watch ${channel?.name} live in HD quality`}
+        />
       </Helmet>
-      
-      <video-js ref={videoRef}
+
+      <video-js
+        ref={videoRef}
         style={{ width: "100%", minHeight: "400px" }}
         id="video"
         autoPlay
@@ -85,10 +90,7 @@ export default function Watch({ selectedLanguages=["English"], data:initialData 
         controls
         className="vjs-default-skin"
       >
-        <source
-          src={decodeURIComponent(url)}
-          type="application/x-mpegURL"
-        />
+        <source src={decodeURIComponent(url)} type="application/x-mpegURL" />
       </video-js>
       <Flex gridGap="2">
         <img src={channel?.logo} alt={channel?.name} width="50" />
@@ -100,15 +102,11 @@ export default function Watch({ selectedLanguages=["English"], data:initialData 
             <strong>Category: </strong>
             <p>
               <Link
-              
                 href={`/category/${
                   channel ? encodeURIComponent(channel.category) : ""
                 }`}
-               
               >
-                  <ChakraLink   color="blue.400">
-                {channel?.category}
-                </ChakraLink>
+                <ChakraLink color="blue.400">{channel?.category}</ChakraLink>
               </Link>
             </p>
           </Flex>
@@ -136,11 +134,14 @@ export default function Watch({ selectedLanguages=["English"], data:initialData 
         <Heading alignSelf="flex-start">Related Channels</Heading>
         <Divider />
         <Category
-        name={channel?.category||""}
-        key={channel?.category}
-        channels={getChannelByCategory(data, channel?.category||"",selectedLanguages ).slice(0,8)}
-      />
-       
+          name={channel?.category || ""}
+          key={channel?.category}
+          channels={getChannelByCategory(
+            data,
+            channel?.category || "",
+            selectedLanguages
+          ).slice(0, 8)}
+        />
       </VStack>
     </Flex>
   );
@@ -149,6 +150,5 @@ export default function Watch({ selectedLanguages=["English"], data:initialData 
 //   const data = await fetchData()
 //   console.log({data})
 //   return { props: { data } }
- 
 
 // }

@@ -26,7 +26,7 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
 
   if (isLoading) return <Spinner />;
 
-  if (error) return <>'An error has occurred: ' + error.message</>;
+  if (error) return <>{error?.message}</>;
 
   return (
     <>
@@ -41,15 +41,15 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
       <Tabs width="calc(100vw - 20px)" overflow="hidden">
         <TabList overflow="scroll" style={{scrollbarWidth:"none", padding:"3px"}}>
           {categories.map((category) => (
-            <Tab>{!category ? "Other" : category}</Tab>
+            <Tab key={category}>{!category ? "Other" : category}</Tab>
           ))}
         </TabList>
         <TabPanels>
           {categories.map((category) => (
-            <TabPanel>
+            <TabPanel key={category}>
               <Category
                 name={category}
-                key={category}
+                
                 channels={getChannelByCategory(
                   data,
                   category,
