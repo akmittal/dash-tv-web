@@ -41,7 +41,7 @@ export default function Watch({
   const url = Array.isArray(router.query.url)
     ? router.query.url[0]
     : router.query.url;
-  const { isLoading, error, data } = useQuery("data", fetchData, {
+  const { isLoading, error, data } = useQuery<any, any>("data", fetchData, {
     initialData,
     staleTime: 1000 * 60 * 60,
   });

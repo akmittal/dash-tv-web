@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function Home({ selectedLanguages=["English"], data:initialData }: Props): ReactElement {
-  const { isLoading, error, data } = useQuery("data", fetchData, {
+  const { isLoading, error, data } = useQuery<any, Error>("data", fetchData, {
     staleTime: 1000 * 60 * 60,
     initialData
   });

@@ -21,7 +21,7 @@ interface Params {
 export default function CategoryPage({
   selectedLanguages,
 }: Props): ReactElement {
-  const { isLoading, error, data } = useQuery("data", fetchData, {
+  const { isLoading, error, data } = useQuery<any, any>("data", fetchData, {
     staleTime: 1000 * 60 * 60,
   });
 
