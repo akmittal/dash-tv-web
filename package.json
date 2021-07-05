@@ -46,8 +46,8 @@
     "workbox-streams": "^6.1.5"
   },
   "scripts": {
-    "start": "next dev",
-    "start-production": "next start",
+    "dev": "next dev",
+    "start": "next start",
     "build": "next build",
     "test": "jest test"
   },
