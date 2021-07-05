@@ -108,7 +108,7 @@ export default function MyApp({ Component, pageProps, data }) {
 MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appContext);
-  const data = (await fetchData()).slice(0, 100); // TODO: temporary limit to 5000 because of netlify limit
+  const data = (await fetchData()).slice(0, 5000); // TODO: temporary limit to 5000 becais
 
   return { ...appProps, data };
 };
