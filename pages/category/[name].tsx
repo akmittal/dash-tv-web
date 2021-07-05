@@ -8,7 +8,6 @@ import { fetchData, getChannelByCategory } from "../../src/utils";
 
 import Head from "next/head";
 
-import { useParams } from "react-router";
 import { Heading } from "@chakra-ui/layout";
 
 interface Props {

@@ -6,7 +6,7 @@ async function main() {
     const data = await fetch("https://iptv-org.github.io/iptv/channels.json")
         .then(res => res.json())
         .then(data => data.map(result => `<url>
-        <loc>https://www.dashtv.in/watch/${encodeURIComponent(result.url)}</loc>
+        <loc>https://www.dashtv.in/watch/${encodeURIComponent(result.name)}</loc>
         <changefreq>daily</changefreq>
         <lastmod>2021-06-02</lastmod>
         </url>`))

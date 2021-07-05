@@ -30,7 +30,7 @@ interface Props {
   data?: any;
 }
 const getChannel = (data: Channel[], url: string) =>
-  data.find((channel: Channel) => channel.url === decodeURIComponent(url));
+  data.find((channel: Channel) => channel.name === decodeURIComponent(url));
 
 export default function Watch({
   selectedLanguages = ["English"],
@@ -85,11 +85,11 @@ export default function Watch({
         style={{ width: "100%", minHeight: "400px" }}
         id="video"
         autoPlay
-        src={decodeURIComponent(url)}
+        src={decodeURIComponent(channel?.url)}
         controls
         className="vjs-default-skin"
       >
-        <source src={decodeURIComponent(url)} type="application/x-mpegURL" />
+        <source src={decodeURIComponent(channel?.url)} type="application/x-mpegURL" />
       </video-js>
       <Flex gridGap="2">
         <img src={channel?.logo} alt={channel?.name} width="50" />

@@ -5,7 +5,7 @@ import Category from "../src/components/Category";
 
 import { fetchData, getCategories, getChannelByCategory } from "../src/utils";
 
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
 interface Props {
@@ -30,14 +30,14 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Watch TV channels live - Movies, Music, Comedy </title>
         <meta name="description" content="Watch Music, Movies, Sports, Business, News Comedy, Cooking, Kids TV channels live for free" />
         <meta
           name="keywords"
           content="TV LIVE, TV STREAM, WATCH TV, Music, Movies, Comedy, Documentry, Business, Weather, Cooking, Lifestyle, Sports, News, Start Sports, AAJ Tak, ABP NEWS, AlJajeera, BBC News, CBC NEWS, CNN, DD NEWS, DW, FOX NEWS, 9XM, VEVO,"
         />
-      </Helmet>
+      </Head>
       <Tabs width="calc(100vw - 20px)" overflow="hidden">
         <TabList overflow="scroll" style={{scrollbarWidth:"none", padding:"3px"}}>
           {categories.map((category) => (
