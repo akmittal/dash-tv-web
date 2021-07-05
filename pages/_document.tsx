@@ -21,13 +21,20 @@ class MyDocument extends Document {
             href="https://unpkg.com/video.js@7.11.8/dist/video-js.min.css"
             rel="stylesheet"
           />
-          <noscript>You need to enable JavaScript to run this app.</noscript>
-          <script
+          
+         
+        </Head>
+
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+        <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-0M3V9ZZBQ0"
           />
-          <script src="https://unpkg.com/video.js@7.11.8/dist/video.min.js" />
-          <script src="https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js" />
+          <script defer src="https://unpkg.com/video.js@7.11.8/dist/video.min.js" />
+          <script defer src="https://unpkg.com/@videojs/http-streaming@2.7.1/dist/videojs-http-streaming.min.js" />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -41,12 +48,6 @@ class MyDocument extends Document {
   `,
             }}
           />
-        </Head>
-
-        <body>
-          <Main />
-          <NextScript />
-        </body>
       </Html>
     );
   }

@@ -1,7 +1,7 @@
 import { Divider, Flex, Heading, VStack } from "@chakra-ui/layout";
 import React, { createRef, ReactElement, useEffect } from "react";
 import videojs from "video.js";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
@@ -73,13 +73,13 @@ export default function Watch({
 
   return (
     <Flex direction="column" gridGap="2">
-      <Helmet>
-        <title>Watch {channel?.name} live Free </title>
+      <Head>
+        <title>Dash TV: {channel?.name} live Free </title>
         <meta
           name="description"
-          content={`Watch ${channel?.name} live in HD quality`}
+          content={`Watch ${channel?.name} TV Channels live in HD quality`}
         />
-      </Helmet>
+      </Head>
 
       <video-js
         ref={videoRef}
