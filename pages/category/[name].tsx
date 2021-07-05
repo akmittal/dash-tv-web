@@ -6,7 +6,7 @@ import Category from "../../src/components/Category";
 
 import { fetchData, getChannelByCategory } from "../../src/utils";
 
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 
 import { useParams } from "react-router";
 import { Heading } from "@chakra-ui/layout";
@@ -34,14 +34,14 @@ export default function CategoryPage({
 
   return (
     <>
-      <Helmet>
-        <title>Watch 5000+ TV channels live Free </title>
+      <Head>
+        <title>DashTV: {category} TV Channels</title>
         <meta name="description" content="Watch TV channels live for free" />
         <meta
           name="keywords"
           content="watch tv, tv channels, stream, free tv, AAJ tak, HBO, 9XM"
         />
-      </Helmet>
+      </Head>
       <Heading>{category?category:"Others"}</Heading>
       <Category
         name={category}

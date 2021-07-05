@@ -6,7 +6,7 @@ import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { Channel, fetchData, getChannelByCategory } from "../../src/utils";
-import Link  from "next/Link";
+import Link  from "next/link";
 import Category from "./../../src/components/Category"
 import { useRouter } from "next/router";
 

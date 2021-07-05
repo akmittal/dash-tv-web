@@ -29,7 +29,7 @@
     "react-router-dom": "^5.2.0",
     "shaka-player": "^3.1.0",
     "shaka-player-react": "^1.1.2",
-    "typescript": "^3.9.5",
+    "typescript": "^4.3.2",
     "video.js": "^7.12.3",
     "web-vitals": "^2.0.0",
     "workbox-background-sync": "^6.1.5",
@@ -51,9 +51,6 @@
     "build": "next build",
     "test": "jest test"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">3%",
@@ -68,6 +65,8 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
+    "eslint": "^7.30.0",
+    "eslint-config-next": "^11.0.1",
     "node-fetch": "^2.6.1"
   }
 }
