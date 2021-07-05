@@ -12,7 +12,7 @@ export default function ChannelCard({ channel }: Props): ReactElement {
   return (
     <Flex width="100%" flexGrow={1} flex="1 0 auto">
       {channel.logo ? (
-        channel.logo.startsWith("https://i.imgur.com")? (
+        channel.logo.startsWith("https://i.imgur.com")||channel.logo.startsWith("https://images-na.ssl-images-amazon.com")? (
           <Image
             src={channel.logo}
             alt={channel.name}
