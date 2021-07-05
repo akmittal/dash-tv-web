@@ -8,7 +8,8 @@ interface Props {
 }
 const bigImages = [
   "https://i.imgur.com/9Xc7Q7S.jpg",
-  "https://i.imgur.com/9Xc7Q7S.jpg",
+  "https://i.imgur.com/JLkzt7v.jpg",
+  "https://i.imgur.com/hcLUKfv.jpg",
   "https://images-na.ssl-images-amazon.com/images/I/81IDRdRJYyL.png",
 ];
 

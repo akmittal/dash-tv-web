@@ -58,11 +58,11 @@ export default function MyApp({ Component, pageProps, data }) {
         <title>DASH TV - Watch Live TV channels Free</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
+      <ColorModeScript />
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
-            <ColorModeScript />
+          
             <Box fontSize="xl">
               <Navbar />
               <Languages
