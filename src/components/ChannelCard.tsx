@@ -6,18 +6,13 @@ import Image from "next/image";
 interface Props {
   channel: Channel;
 }
-const bigImages = [
-  "https://i.imgur.com/9Xc7Q7S.jpg",
-  "https://i.imgur.com/JLkzt7v.jpg",
-  "https://i.imgur.com/hcLUKfv.jpg",
-  "https://images-na.ssl-images-amazon.com/images/I/81IDRdRJYyL.png",
-];
+
 
 export default function ChannelCard({ channel }: Props): ReactElement {
   return (
     <Flex width="100%" flexGrow={1} flex="1 0 auto">
       {channel.logo ? (
-        bigImages.includes(channel.logo) ? (
+        channel.logo.startsWith("https://i.imgur.com")? (
           <Image
             src={channel.logo}
             alt={channel.name}
