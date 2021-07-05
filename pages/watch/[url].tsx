@@ -69,6 +69,9 @@ export default function Watch({
 
   if (error) return <>{ error?.message}</>;
   const channel = getChannel(data, decodeURIComponent(url));
+  if(!channel){
+    return <>Invalid Channel</>
+  }
 
   return (
     <Flex direction="column" gridGap="2">
@@ -85,7 +88,7 @@ export default function Watch({
         style={{ width: "100%", minHeight: "400px" }}
         id="video"
         autoPlay
-        src={decodeURIComponent(channel?.url)}
+        src={decodeURIComponent(channel.url)}
         controls
         className="vjs-default-skin"
       >
