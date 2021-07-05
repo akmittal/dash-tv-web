@@ -50,7 +50,6 @@ export default function MyApp({ Component, pageProps, data }) {
       newLanguages = [...selectedLanguages.filter((lan) => language !== lan)];
     }
     setSelectedLanguages(newLanguages);
-    localStorage.setItem("selected-languages", JSON.stringify(newLanguages));
   };
   return (
     <>

@@ -36,7 +36,6 @@ export default function Watch({
   selectedLanguages = ["English"],
   data: initialData,
 }: Props): ReactElement {
-  console.log({ initialData });
   const router = useRouter();
   const url = Array.isArray(router.query.url)
     ? router.query.url[0]
