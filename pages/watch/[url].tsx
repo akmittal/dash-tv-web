@@ -1,14 +1,14 @@
 import { Divider, Flex, Heading, VStack } from "@chakra-ui/layout";
 import React, { createRef, ReactElement, useEffect } from "react";
-import { useParams } from "react-router";
 import videojs from "video.js";
 import Helmet from "react-helmet";
 import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { Channel, fetchData, getChannelByCategory } from "../utils";
-import { Link } from "react-router-dom";
-import Category from "./../components/Category"
+import { Channel, fetchData, getChannelByCategory } from "../../src/utils";
+import Link  from "next/Link";
+import Category from "./../../src/components/Category"
+import { useRouter } from "next/router";
 
 declare global {
   namespace JSX {
@@ -32,8 +32,10 @@ interface Props{
 const getChannel = (data: Channel[], url: string) =>
   data.find((channel: Channel) => channel.url === decodeURIComponent(url));
 
-export default function Watch({ selectedLanguages, data:initialData }: Props): ReactElement {
-  const params = useParams<ParamTypes>();
+export default function Watch({ selectedLanguages=["English"], data:initialData }: Props): ReactElement {
+  console.log({initialData})
+  const router = useRouter();
+  const url = Array.isArray(router.query.url)?router.query.url[0]:router.query.url
   const { isLoading, error, data } = useQuery("data", fetchData, {
     initialData,
     staleTime: 1000 * 60 * 60,
@@ -47,7 +49,7 @@ export default function Watch({ selectedLanguages, data:initialData }: Props): R
   },[])
 
   useEffect(() => {
-    const channel = getChannel(data, decodeURIComponent(params.url));
+    const channel = getChannel(data, decodeURIComponent(url));
     let player: videojs.Player;
     if (data && videoRef.current) {
       player = videojs("video", {}, () => {
@@ -58,12 +60,12 @@ export default function Watch({ selectedLanguages, data:initialData }: Props): R
       // player.reset()
      
     };
-  }, [data, params.url, videoRef]);
+  }, [data, url, videoRef]);
 
   if (isLoading) return <Spinner />;
 
   if (error) return <>'An error has occurred: ' + error.message</>;
-  const channel = getChannel(data, decodeURIComponent(params.url));
+  const channel = getChannel(data, decodeURIComponent(url));
 
 
   return (
@@ -79,12 +81,12 @@ export default function Watch({ selectedLanguages, data:initialData }: Props): R
         style={{ width: "100%", minHeight: "400px" }}
         id="video"
         autoPlay
-        src={decodeURIComponent(params.url)}
+        src={decodeURIComponent(url)}
         controls
         className="vjs-default-skin"
       >
         <source
-          src={decodeURIComponent(params.url)}
+          src={decodeURIComponent(url)}
           type="application/x-mpegURL"
         />
       </video-js>
@@ -97,15 +99,17 @@ export default function Watch({ selectedLanguages, data:initialData }: Props): R
           <Flex gridGap="1">
             <strong>Category: </strong>
             <p>
-              <ChakraLink
-                color="blue.400"
-                to={`/category/${
+              <Link
+              
+                href={`/category/${
                   channel ? encodeURIComponent(channel.category) : ""
                 }`}
-                as={Link}
+               
               >
+                  <ChakraLink   color="blue.400">
                 {channel?.category}
-              </ChakraLink>
+                </ChakraLink>
+              </Link>
             </p>
           </Flex>
         )}

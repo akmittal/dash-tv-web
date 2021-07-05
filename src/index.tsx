@@ -9,15 +9,16 @@ import { fetchData } from "./utils";
 
 const queryClient = new QueryClient();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ColorModeScript />
-      <App />
-    </QueryClientProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default function NextIndexWrapper() {
+  return (
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ColorModeScript />
+        <App />
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+}
 
 queryClient.prefetchQuery("data", fetchData, {cacheTime: 60 * 60 * 1000});
 

@@ -18,9 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "preserve"
   },
   "include": [
     "src"
+, "pages/watch"  ],
+  "exclude": [
+    "node_modules"
   ]
 }

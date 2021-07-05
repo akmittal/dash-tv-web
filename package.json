@@ -12,19 +12,21 @@
     "@testing-library/user-event": "^12.0.2",
     "@types/jest": "^25.0.0",
     "@types/node": "^12.0.0",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-helmet": "^6.1.1",
     "@types/video.js": "^7.3.15",
     "framer-motion": "^4.0.0",
     "mux.js": "^5.11.0",
+    "next": "11.0.1",
+    "nprogress": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
     "react-query": "^3.16.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
     "shaka-player": "^3.1.0",
     "shaka-player-react": "^1.1.2",
     "typescript": "^3.9.5",
@@ -44,10 +46,10 @@
     "workbox-streams": "^6.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "next dev",
+    "start-production": "next start",
+    "build": "next build",
+    "test": "jest test"
   },
   "eslintConfig": {
     "extends": "react-app"

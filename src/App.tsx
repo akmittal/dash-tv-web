@@ -1,3 +1,4 @@
+// import "./App.css";
 import * as React from "react";
 import { useQuery } from "react-query";
 import {
@@ -15,17 +16,21 @@ import Navbar from "./components/Navbar";
 import { fetchData, getLanguages } from "./utils";
 import { SettingsIcon } from "@chakra-ui/icons";
 import Languages from "./components/Languages";
-import "./App.css";
 
 const CategoryPage = React.lazy(() => import("./pages/Category"));
 
 const Watch = React.lazy(() => import("./pages/Watch"));
 const Home = React.lazy(() => import("./pages/Home"));
 
-const preSelectedLanguages = localStorage.getItem("selected-languages");
+let preSelectedLanguages:string = '';
+if(typeof window !== 'undefined'){
+   preSelectedLanguages = localStorage.getItem("selected-languages") ||'';
 if(!preSelectedLanguages){
   localStorage.setItem("selected-languages",JSON.stringify(["English"]));
 }
+}
+
+
 
 export const App = () => {
   const [selectedLanguages, setSelectedLanguages] = React.useState<string[]>(
