@@ -17,8 +17,9 @@ export default function ChannelCard({ channel }: Props): ReactElement {
             src={channel.logo}
             alt={channel.name}
             loading="lazy"
+            objectFit="contain"
             width="400px"
-            height="100%"
+            height="400px"
           />
         ) : (
           <img

@@ -7,8 +7,8 @@ async function main() {
         .then(res => res.json())
         .then(data => data.map(result => `<url>
         <loc>https://www.dashtv.in/watch/${encodeURIComponent(result.name)}</loc>
-        <changefreq>daily</changefreq>
-        <lastmod>2021-06-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <lastmod>2021-07-05</lastmod>
         </url>`))
         .then(res => res.join("\n"))
         .then(data => `
