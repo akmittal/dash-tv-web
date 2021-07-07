@@ -53,7 +53,7 @@ function showToast(setShowLanguagesModal){
     title: "Languages",
     description: "",
     status: "info",
-    duration: 90000,
+    duration: 9000,
     isClosable: true,
     render() {
       return (
