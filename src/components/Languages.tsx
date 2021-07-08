@@ -13,7 +13,7 @@ import React, { ReactElement } from "react";
 import { Language } from "./../utils";
 
 interface Props {
-  languages: Language[];
+  languages: string[];
   selectedLanguages: string[];
   isOpen: boolean;
   onClose: () => void;
@@ -35,19 +35,19 @@ export default function Languages({
         <ModalCloseButton />
         <ModalBody>
           {languages.map((language) => (
-            <Badge key={language.code}
+            <Badge key={language}
             cursor="pointer"
               m="1"
               p="2"
               background={
-                selectedLanguages.includes(language.name)
+                selectedLanguages.includes(language)
                   ? "pink.600"
                   : "blackAlpha.100"
               }
               borderRadius="3xl"
-              onClick={() => toggleSelect(language.name)}
+              onClick={() => toggleSelect(language)}
             >
-              {language.name}
+              {language}
             </Badge>
           ))}
         </ModalBody>

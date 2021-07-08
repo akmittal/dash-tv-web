@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import {useRouter} from "next/router";
 import Category from "../../src/components/Category";
 
-import { fetchData, getChannelByCategory } from "../../src/utils";
+import { fetchData, fetchDataWithLanguages, getChannelByCategory } from "../../src/utils";
 
 import Head from "next/head";
 
@@ -20,7 +20,7 @@ interface Params {
 export default function CategoryPage({
   selectedLanguages,
 }: Props): ReactElement {
-  const { isLoading, error, data } = useQuery<any, any>("data", fetchData, {
+  const { isLoading, error, data } = useQuery<any, any>("data", () => fetchDataWithLanguages(selectedLanguages), {
     staleTime: 1000 * 60 * 60,
   });
 

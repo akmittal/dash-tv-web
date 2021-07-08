@@ -1,6 +1,6 @@
-import App from "next/app";
+import App, { AppContext } from "next/app";
 import "../src/App.css";
-import { useEffect, useState, lazy ,Suspense} from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Head from "next/head";
 import { ColorModeSwitcher } from "./../src/ColorModeSwitcher";
 import {
@@ -11,7 +11,12 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { fetchData, getLanguages } from "./../src/utils";
+import {
+  fetchAllLanguages,
+  fetchData,
+  fetchDataWithLanguages,
+  getLanguages,
+} from "./../src/utils";
 import { Hydrate } from "react-query/hydration";
 import Router from "next/router";
 import NProgress from "nprogress"; //nprogress module
@@ -29,26 +34,21 @@ import Navbar from "./../src/components/Navbar";
 
 import { SettingsIcon } from "@chakra-ui/icons";
 import { FiX } from "react-icons/fi";
-import useLanguages from "../hooks/useLanguages";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
+import cookie from "next-cookies";
+import jscookie from "js-cookie";
 
 const queryClient = new QueryClient();
-let preSelectedLanguages: string = "";
-if (typeof window !== "undefined") {
-  preSelectedLanguages = localStorage.getItem("selected-languages") || "";
-  if (!preSelectedLanguages) {
-    localStorage.setItem("selected-languages", JSON.stringify(["English"]));
-  }
-}
+
 const toast = createStandaloneToast();
 
-const Languages=  dynamic(() => import("./../src/components/Languages"));
+const Languages = dynamic(() => import("./../src/components/Languages"));
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-function showToast(setShowLanguagesModal){
+function showToast(setShowLanguagesModal) {
   toast({
     title: "Languages",
     description: "",
@@ -99,17 +99,15 @@ function showToast(setShowLanguagesModal){
       );
     },
   });
-
 }
-export default function MyApp({ Component, pageProps, data }) {
-  
-  const [selectedLanguages, setSelectedLanguages] = useLanguages();
+export default function MyApp({ Component, pageProps, selectedLanguages:preselected, allLanguages }) {
+  const [selectedLanguages, setSelectedLanguages] = useState(preselected||["English"]);
   const [showLanguagesModal, setShowLanguagesModal] = useState<boolean>(false);
   useEffect(() => {
-    if (!preSelectedLanguages) {
-      setTimeout(() => showToast(setShowLanguagesModal), 4000)
+    if (!preselected) {
+      setTimeout(() => showToast(setShowLanguagesModal), 4000);
     }
-  }, []);
+  }, [preselected]);
   const toggleLanguage = (language: string) => {
     let newLanguages = [];
     if (!selectedLanguages.includes(language)) {
@@ -117,7 +115,15 @@ export default function MyApp({ Component, pageProps, data }) {
     } else {
       newLanguages = [...selectedLanguages.filter((lan) => language !== lan)];
     }
+    jscookie.set("selectedLanguages", JSON.stringify(newLanguages), {
+    
+      expires: 9000,
+    });
+    if (typeof window !== "undefined") {
+    localStorage.setItem("selected-languages", JSON.stringify(newLanguages));
+    }
     setSelectedLanguages(newLanguages);
+    
   };
   return (
     <>
@@ -131,15 +137,15 @@ export default function MyApp({ Component, pageProps, data }) {
           <Hydrate state={pageProps.dehydratedState}>
             <Box fontSize="xl">
               <Navbar />
-          
+
               <Languages
                 selectedLanguages={selectedLanguages}
                 toggleSelect={toggleLanguage}
-                languages={getLanguages(data)}
+                languages={allLanguages}
                 isOpen={showLanguagesModal}
                 onClose={() => setShowLanguagesModal(false)}
               />
-               
+
               <Grid p={3}>
                 <Flex justifyContent="flex-end">
                   <IconButton
@@ -156,7 +162,7 @@ export default function MyApp({ Component, pageProps, data }) {
 
                 <Component
                   {...pageProps}
-                  data={data}
+              
                   selectedLanguages={selectedLanguages}
                 />
               </Grid>
@@ -173,10 +179,15 @@ export default function MyApp({ Component, pageProps, data }) {
 // perform automatic static optimization, causing every page in your app to
 // be server-side rendered.
 
-MyApp.getInitialProps = async (appContext) => {
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  const { selectedLanguages } = cookie(appContext.ctx);
+  const allLanguages = await fetchAllLanguages()
+
+  
+
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appContext);
-  const data = (await fetchData()).slice(0, 5000); // TODO: temporary limit to 5000 becais
+ 
 
-  return { ...appProps, data };
+  return { ...appProps, selectedLanguages, allLanguages };
 };

@@ -5,10 +5,13 @@ import Head from "next/head";
 import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { Channel, fetchData, getChannelByCategory } from "../../src/utils";
+import {  fetchDataWithLanguages, fetchDataWithName, getChannelByCategory } from "../../src/utils";
 import Link from "next/link";
 import Category from "./../../src/components/Category";
 import { useRouter } from "next/router";
+import { GetServerSideProps, GetServerSidePropsResult } from "next";
+import cookie from "next-cookies";
+import type {Channel} from "./../../src/utils/index"
 
 declare global {
   namespace JSX {
@@ -27,21 +30,21 @@ interface ParamTypes {
 
 interface Props {
   selectedLanguages: string[];
-  data?: any;
+  channel?: Channel;
+  related:Channel[]
 }
-const getChannel = (data: Channel[], url: string) =>
-  data.find((channel: Channel) => channel.name === decodeURIComponent(url));
+
 
 export default function Watch({
-  selectedLanguages = ["English"],
-  data: initialData,
+  related,
+  channel,
 }: Props): ReactElement {
   const router = useRouter();
   const url = Array.isArray(router.query.url)
     ? router.query.url[0]
     : router.query.url;
-  const { isLoading, error, data } = useQuery<any, any>("data", fetchData, {
-    initialData,
+  const { isLoading, error, data } = useQuery<any, any>(["data",url], () => fetchDataWithName(url), {
+    initialData: channel,
     staleTime: 1000 * 60 * 60,
   });
   const videoRef = createRef<HTMLElement>();
@@ -53,7 +56,7 @@ export default function Watch({
   }, []);
 
   useEffect(() => {
-    const channel = getChannel(data, decodeURIComponent(url));
+   
     let player: videojs.Player;
     if (data && videoRef.current) {
       player = videojs("video", {}, () => {
@@ -68,7 +71,6 @@ export default function Watch({
   if (isLoading) return <Spinner />;
 
   if (error) return <>{ error?.message}</>;
-  const channel = getChannel(data, decodeURIComponent(url));
   if(!channel){
     return <>Invalid Channel</>
   }
@@ -138,19 +140,23 @@ export default function Watch({
         <Category
           name={channel?.category || ""}
           key={channel?.category}
-          channels={getChannelByCategory(
-            data,
-            channel?.category || "",
-            selectedLanguages
-          ).slice(0, 8)}
+          channels={related.slice(0,10)}
         />
       </VStack>
     </Flex>
   );
 }
-// export const getServerSideProps = async (ctx) => {
-//   const data = await fetchData()
-//   console.log({data})
-//   return { props: { data } }
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+const res: GetServerSidePropsResult<any>  = { props : {}}
+const name = Array.isArray(ctx.query.url)?ctx.query.url[0]:ctx.query.url
+ const data = await fetchDataWithName(name);
 
-// }
+ const { selectedLanguages }:any = cookie(ctx);
+
+  const related = await fetchDataWithLanguages(selectedLanguages);
+
+ res.props.channel = data;
+ res.props.related = related;
+
+  return res;
+};

@@ -1,3 +1,4 @@
+
 export interface Channel {
   name: string;
   logo: string;
@@ -25,20 +26,42 @@ export const fetchData = () => {
     res.json()
   );
 };
-const channelIncudesLanguage = (channel: Channel, languages: string[]) => {
-  return channel.languages
-    .map((lang) => lang.name)
-    .some((val) => languages.includes(val));
+export const fetchDataWithLanguages = (languages?:string[]) => {
+  if(!languages){
+    languages = ["English"]
+  }
+  const params = new URLSearchParams();
+  for (const language of languages){
+    params.append("language", language)
+  }
+
+  return fetch(`http://localhost:3000/api/iptv?${params.toString()}`).then((res) =>
+    res.json()
+  );
 };
 
-export const getCategories = (data: Channel[], languages: string[]) => {
+export const fetchDataWithName = (name:string) => {
+  return fetch(`http://localhost:3000/api/iptv/${name}`).then((res) =>
+  res.json()
+);
+}
+
+export const fetchAllLanguages = () => {
+  return fetch(`http://localhost:3000/api/iptv/languages`).then((res) =>
+  res.json()
+);
+}
+
+
+
+
+export const getCategories = (data: Channel[], ) => {
   return Array.from(
     new Set(
       data
         .filter(
           (channel) =>
-            channel.category !== "XXX" &&
-            channelIncudesLanguage(channel, languages)
+            channel.category !== "XXX"
         )
         .map((channel) => channel.category)
     )
@@ -48,26 +71,11 @@ export const getCategories = (data: Channel[], languages: string[]) => {
 export const getChannelByCategory = (
   data: Channel[],
   category: string,
-  languages: string[]
+  
 ) => {
   return data.filter(
     (channel) =>
       channel.category === category &&
-      channelIncudesLanguage(channel, languages) &&
       channel.category !== "XXX"
   );
-};
-
-export const getLanguages = (channels: Channel[]): Language[] => {
-  const languageCodes = new Set();
-  const languages = [];
-  for (const channel of channels) {
-    for (const language of channel.languages) {
-      if (!languageCodes.has(language.code)) {
-        languageCodes.add(language.code);
-        languages.push(language);
-      }
-    }
-  }
-  return languages;
 };

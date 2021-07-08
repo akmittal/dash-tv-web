@@ -2,11 +2,14 @@ import { Spinner } from "@chakra-ui/spinner";
 import React, { ReactElement, useMemo } from "react";
 import { useQuery } from "react-query";
 import Category from "../src/components/Category";
+import cookie from "next-cookies";
+import {GetServerSideProps, GetServerSidePropsResult} from "next";
 
-import { fetchData, getCategories, getChannelByCategory } from "../src/utils";
+import {  fetchDataWithLanguages, getCategories, getChannelByCategory } from "../src/utils";
 
 import Head from "next/head";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
+
 
 interface Props {
   selectedLanguages: string[];
@@ -14,14 +17,14 @@ interface Props {
 }
 
 export default function Home({ selectedLanguages=["English"], data:initialData }: Props): ReactElement {
-  const { isLoading, error, data } = useQuery<any, Error>("data", fetchData, {
-    staleTime: 1000 * 60 * 60,
+  const { isLoading, error, data } = useQuery<any, Error>(["data",selectedLanguages], () => fetchDataWithLanguages(selectedLanguages), {
+    // staleTime: 1000 * 60 * 60,
     initialData
   });
 
   const categories = useMemo(
-    () => getCategories(data, selectedLanguages),
-    [data, selectedLanguages]
+    () => getCategories(data),
+    [data]
   );
 
   if (isLoading) return <Spinner />;
@@ -52,8 +55,7 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
                 
                 channels={getChannelByCategory(
                   data,
-                  category,
-                  selectedLanguages
+                  category
                 )}
               />
             </TabPanel>
@@ -63,3 +65,14 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { selectedLanguages } = cookie(ctx);
+  const res: GetServerSidePropsResult<any>  = { props : {}}
+
+   const json = await fetchDataWithLanguages(selectedLanguages);
+
+   res.props.data = json;
+  
+    return res;
+  };
