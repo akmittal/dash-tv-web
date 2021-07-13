@@ -21,7 +21,7 @@ interface TVG {
   url: any;
 }
 export const fetchData = () => {
-  return fetch("https://iptv-org.github.io/iptv/channels.json").then((res) =>
+  return fetch("https://iptv-org.github.io/iptv/channels.json",{ cache:"force-cache"}).then((res) =>
     res.json()
   );
 };

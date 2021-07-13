@@ -103,7 +103,7 @@ export default function Watch({
           <Flex gridGap="1">
             <strong>Category: </strong>
             <p>
-              <Link
+              <Link passHref={true}
                 href={`/category/${
                   channel ? encodeURIComponent(channel.category) : ""
                 }`}
