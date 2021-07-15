@@ -76,7 +76,7 @@ export default function Watch({
   return (
     <Flex direction="column" gridGap="2">
       <Head>
-        <title>Dash TV: {channel?.name} live Free </title>
+        <title>{channel?.name} watch live Free - Dash TV</title>
         <meta
           name="description"
           content={`Watch ${channel?.name} TV Channels live in HD quality`}
