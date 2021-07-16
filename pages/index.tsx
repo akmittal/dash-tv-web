@@ -31,11 +31,11 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
   return (
     <>
       <Head>
-        <title>Watch TV channels live - Movies, Music, Comedy </title>
+        <title>Watch TV channels live online - Movies, Music, Comedy, News </title>
         <meta name="description" content="Watch Music, Movies, Sports, Business, News Comedy, Cooking, Kids TV channels live for free" />
         <meta
           name="keywords"
-          content="TV LIVE, TV STREAM, WATCH TV, Music, Movies, Comedy, Documentry, Business, Weather, Cooking, Lifestyle, Sports, News, Start Sports, AAJ Tak, ABP NEWS, AlJajeera, BBC News, CBC NEWS, CNN, DD NEWS, DW, FOX NEWS, 9XM, VEVO,"
+          content="TV LIVE online, TV Online, TV STREAM, WATCH TV, Music, Movies, Comedy, Documentry, Business, Weather, Cooking, Lifestyle, Sports, News, Start Sports, AAJ Tak, ABP NEWS, AlJajeera, BBC News, CBC NEWS, CNN, DD NEWS, DW, FOX NEWS, 9XM, VEVO,"
         />
       </Head>
       <Tabs width="calc(100vw - 20px)" overflow="hidden">
