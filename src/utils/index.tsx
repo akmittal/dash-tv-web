@@ -41,13 +41,13 @@ export const fetchDataWithLanguages = (languages?:string[]) => {
 };
 
 export const fetchDataWithName = (name:string) => {
-  return fetch(`http://localhost:3000/api/iptv/${name}`).then((res) =>
+  return fetch(`http://localhost:4000/channel/${name}`).then((res) =>
   res.json()
 );
 }
 
 export const fetchAllLanguages = () => {
-  return fetch(`http://localhost:3000/api/iptv/languages`).then((res) =>
+  return fetch(`http://localhost:4000/languages`).then((res) =>
   res.json()
 );
 }

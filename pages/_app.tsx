@@ -182,6 +182,7 @@ export default function MyApp({ Component, pageProps, selectedLanguages:preselec
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const { selectedLanguages } = cookie(appContext.ctx);
   const allLanguages = await fetchAllLanguages()
+  console.log({allLanguages})
 
   
 

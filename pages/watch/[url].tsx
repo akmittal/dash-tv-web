@@ -30,14 +30,13 @@ interface ParamTypes {
 
 interface Props {
   selectedLanguages: string[];
-  channel?: Channel;
-  related:Channel[]
+  data: {channel: Channel, related: Channel[]};
+  
 }
 
 
 export default function Watch({
-  related,
-  channel,
+  data:{channel, related}
 }: Props): ReactElement {
   const router = useRouter();
   const url = Array.isArray(router.query.url)
@@ -118,7 +117,7 @@ export default function Watch({
         <Flex gridGap="1">
           <strong>Languages: </strong>
           <p>
-            {channel?.languages.reduce(
+            {channel?.languages?.reduce(
               (acc, language) => acc + language?.name + ", ",
               ""
             )}
@@ -127,7 +126,7 @@ export default function Watch({
         <Flex gridGap="1">
           <strong>Countries: </strong>
           <p>
-            {channel?.countries.reduce(
+            {channel?.countries?.reduce(
               (acc, country) => acc + country?.name + ", ",
               ""
             )}
@@ -140,7 +139,7 @@ export default function Watch({
         <Category
           name={channel?.category || ""}
           key={channel?.category}
-          channels={related.slice(0,10)}
+          channels={related}
         />
       </VStack>
     </Flex>
@@ -151,12 +150,9 @@ const res: GetServerSidePropsResult<any>  = { props : {}}
 const name = Array.isArray(ctx.query.url)?ctx.query.url[0]:ctx.query.url
  const data = await fetchDataWithName(name);
 
- const { selectedLanguages }:any = cookie(ctx);
 
-  const related = await fetchDataWithLanguages(selectedLanguages);
+ res.props.data = data;
 
- res.props.channel = data;
- res.props.related = related;
 
   return res;
 };
