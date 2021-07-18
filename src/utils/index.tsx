@@ -21,7 +21,11 @@ interface TVG {
   name: string;
   url: any;
 }
-const host = typeof window !== "undefined" ? "":"http://localhost:3000";
+const dev = process.env.NODE_ENV !== 'production';
+let host = typeof window !== "undefined" ? "":"http://localhost:3000";
+if(!dev){
+  host = "https://www.dashtv.in"
+}
 
 export const fetchDataWithLanguages = (languages?:string[]) => {
   if(!languages){
