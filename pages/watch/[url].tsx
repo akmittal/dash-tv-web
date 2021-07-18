@@ -78,7 +78,7 @@ export default function Watch({
   return (
     <Flex direction="column" gridGap="2">
       <Head>
-        <title>Dash TV: {channel?.name} live Free </title>
+        <title>{channel?.name} watch live Free - Dash TV</title>
         <meta
           name="description"
           content={`Watch ${channel?.name} TV Channels live in HD quality`}
@@ -105,7 +105,7 @@ export default function Watch({
           <Flex gridGap="1">
             <strong>Category: </strong>
             <p>
-              <Link
+              <Link passHref={true}
                 href={`/category/${
                   channel ? encodeURIComponent(channel.category) : ""
                 }`}

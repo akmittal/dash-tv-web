@@ -34,7 +34,7 @@ export default function CategoryPage({
   return (
     <>
       <Head>
-        <title>DashTV: {category} TV Channels</title>
+        <title>Dash TV: {category} TV Channels</title>
         <meta name="description" content="Watch TV channels live for free" />
         <meta
           name="keywords"

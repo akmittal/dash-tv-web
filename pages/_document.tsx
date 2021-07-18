@@ -8,7 +8,7 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <link rel="icon" href={`${process.env.PUBLIC_URL}/favicon.png`} />
           <meta name="theme-color" content="#1A202C" />
-          <meta name="description" content="Watch 5000+ tv channels for free" />
+          <meta name="description" content="Watch 10,000+ TV channels for free. Music, Movies, News, Comedy, Entertainment" />
           <link
             rel="apple-touch-icon"
             href={`${process.env.PUBLIC_URL}/logo.png`}
