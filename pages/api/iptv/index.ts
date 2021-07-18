@@ -1,10 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import fetch from "node-fetch";
 
 const HandleHome = async (req: NextApiRequest, res: NextApiResponse) => {
   const params = new URLSearchParams();
   for (const key in req.query) {
-    if(Array.isArray(req.query[key])){
-      for(const value of req.query[key]){
+    const queryValue = req.query[key]
+   
+   
+    if(Array.isArray(queryValue)){
+      for(const value of queryValue){
         params.append(
           key,
           value
@@ -12,8 +16,8 @@ const HandleHome = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     }else{
       params.set(
-        key,
-        req.query[key]
+        key,queryValue
+        
       );
     }
 

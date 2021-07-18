@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import fetch from "node-fetch";
 
 const HandleHome = async (req: NextApiRequest, res: NextApiResponse) => {
   const name = Array.isArray(req.query.byName)?req.query.byName[0]:req.query.byName

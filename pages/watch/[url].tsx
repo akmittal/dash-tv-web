@@ -5,7 +5,7 @@ import Head from "next/head";
 import { Spinner } from "@chakra-ui/spinner";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import {  fetchDataWithLanguages, fetchDataWithName, getChannelByCategory } from "../../src/utils";
+import {  fetchDataWithLanguages, fetchDataWithName, getChannelByCategory, Language } from "../../src/utils";
 import Link from "next/link";
 import Category from "./../../src/components/Category";
 import { useRouter } from "next/router";
@@ -119,7 +119,7 @@ export default function Watch({
           <strong>Languages: </strong>
           <p>
             {channel?.languages?.reduce(
-              (acc, language) => acc + language?.name + ", ",
+              (acc:string, language:Language) => acc + language?.name + ", ",
               ""
             )}
           </p>
@@ -128,7 +128,7 @@ export default function Watch({
           <strong>Countries: </strong>
           <p>
             {channel?.countries?.reduce(
-              (acc, country) => acc + country?.name + ", ",
+              (acc:string, country:any) => acc + country?.name + ", ",
               ""
             )}
           </p>
