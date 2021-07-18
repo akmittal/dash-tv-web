@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const res: GetServerSidePropsResult<any>  = { props : {}}
 
    const json = await fetchDataWithLanguages(selectedLanguages);
-
+console.log({json})
    res.props.data = json;
   
     return res;

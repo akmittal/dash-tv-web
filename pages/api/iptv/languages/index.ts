@@ -1,20 +1,12 @@
-import path from "path";
 import { NextApiRequest, NextApiResponse } from "next";
-import { readdir } from "fs";
-import { promisify } from "util";
-import { createItemsIfOld } from "..";
 
-const readdirP = promisify(readdir);
+const HandleLanguages = async (req: NextApiRequest, res: NextApiResponse) => {
 
-const metaPath = path.resolve(process.cwd(), "_files","languages");
 
-const fetchDataWithLanguages = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  await createItemsIfOld()
-  const files = await readdirP(metaPath);
-  res.json(files.map((file) => file.replace(".json", "")));
+  const url = `http://localhost:4000/languages`;
+  const result = await fetch(url);
+  const body = result.body;
+  body?.pipe(res);
 };
 
-export default fetchDataWithLanguages;
+export default HandleLanguages;

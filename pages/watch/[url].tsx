@@ -36,16 +36,17 @@ interface Props {
 
 
 export default function Watch({
-  data:{channel, related}
+  data
 }: Props): ReactElement {
   const router = useRouter();
   const url = Array.isArray(router.query.url)
     ? router.query.url[0]
     : router.query.url;
-  const { isLoading, error, data } = useQuery<any, any>(["data",url], () => fetchDataWithName(url), {
-    initialData: channel,
+  const { isLoading, error, data:{channel, related} } = useQuery<any, any>(["data",url], () => fetchDataWithName(url), {
+    initialData: data,
     staleTime: 1000 * 60 * 60,
   });
+  console.log({channel, related})
   const videoRef = createRef<HTMLElement>();
   useEffect(() => {
     const player = videojs.getPlayer("video");

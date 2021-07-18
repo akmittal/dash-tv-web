@@ -21,11 +21,8 @@ interface TVG {
   name: string;
   url: any;
 }
-export const fetchData = () => {
-  return fetch("https://iptv-org.github.io/iptv/channels.json",{ cache:"force-cache"}).then((res) =>
-    res.json()
-  );
-};
+const host = typeof window !== "undefined" ? "":"http://localhost:3000";
+
 export const fetchDataWithLanguages = (languages?:string[]) => {
   if(!languages){
     languages = ["English"]
@@ -35,19 +32,19 @@ export const fetchDataWithLanguages = (languages?:string[]) => {
     params.append("language", language)
   }
 
-  return fetch(`http://localhost:3000/api/iptv?${params.toString()}`).then((res) =>
+  return fetch(`${host}/api/iptv?${params.toString()}`).then((res) =>
     res.json()
   );
 };
 
 export const fetchDataWithName = (name:string) => {
-  return fetch(`http://localhost:4000/channel/${name}`).then((res) =>
+  return fetch(`${host}/api/iptv/${name}`).then((res) =>
   res.json()
 );
 }
 
 export const fetchAllLanguages = () => {
-  return fetch(`http://localhost:4000/languages`).then((res) =>
+  return fetch(`${host}/api/iptv/languages`).then((res) =>
   res.json()
 );
 }
