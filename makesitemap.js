@@ -21,7 +21,7 @@ async function main() {
         if (err) throw err;
         console.log('Saved!');
       });
-    console.log(data)
+  
 }
 
 

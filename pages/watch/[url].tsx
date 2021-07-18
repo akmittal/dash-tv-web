@@ -46,7 +46,6 @@ export default function Watch({
     initialData: data,
     staleTime: 1000 * 60 * 60,
   });
-  console.log({channel, related})
   const videoRef = createRef<HTMLElement>();
   useEffect(() => {
     const player = videojs.getPlayer("video");
