@@ -66,7 +66,7 @@ export const getCategories = (data: Channel[], ) => {
         )
         .map((channel) => channel.category)
     )
-  );
+  ).sort((prev,current) => prev ==="Movies" ? -1:1);
 };
 
 export const getChannelByCategory = (
