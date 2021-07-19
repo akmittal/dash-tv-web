@@ -22,7 +22,7 @@ interface TVG {
   url: any;
 }
 const dev = process.env.NODE_ENV !== 'production';
-let host = typeof window !== "undefined" ? "":"http://localhost:3000";
+let host = typeof window !== "undefined" ? "":"http://holy-wave-2608.fly.dev";
 if(!dev){
   host = "https://www.dashtv.in"
 }
@@ -36,19 +36,19 @@ export const fetchDataWithLanguages = (languages?:string[]) => {
     params.append("language", language)
   }
 
-  return fetch(`${host}/api/iptv?${params.toString()}`).then((res) =>
+  return fetch(`${host}/channels?${params.toString()}`).then((res) =>
     res.json()
   );
 };
 
 export const fetchDataWithName = (name:string) => {
-  return fetch(`${host}/api/iptv/${name}`).then((res) =>
+  return fetch(`${host}/channel/${name}`).then((res) =>
   res.json()
 );
 }
 
 export const fetchAllLanguages = () => {
-  return fetch(`${host}/api/iptv/languages`).then((res) =>
+  return fetch(`${host}/languages`).then((res) =>
   res.json()
 );
 }
