@@ -24,7 +24,7 @@ const HandleHome = async (req: NextApiRequest, res: NextApiResponse) => {
     
   }
 
-  const url = `https://shy-sea-8296.fly.dev/channels?${params.toString()}`;
+  const url = `https://holy-wave-2608.fly.dev/channels?${params.toString()}`;
   const result = await fetch(url);
   const body = result.body;
   body?.pipe(res);
