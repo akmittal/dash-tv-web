@@ -22,7 +22,7 @@ interface TVG {
   url: any;
 }
 const dev = process.env.NODE_ENV !== 'production';
-let host = typeof window !== "undefined" ? "":"http://holy-wave-2608.fly.dev";
+let host = typeof window !== "undefined" ? "":"https://holy-wave-2608.fly.dev";
 if(!dev){
   host = "https://www.dashtv.in"
 }
