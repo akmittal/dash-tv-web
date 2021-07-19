@@ -24,7 +24,7 @@ interface TVG {
 const dev = process.env.NODE_ENV !== 'production';
 let host = typeof window !== "undefined" ? "":"https://holy-wave-2608.fly.dev";
 if(!dev){
-  host = "https://www.dashtv.in"
+  host = "https://holy-wave-2608.fly.dev"
 }
 
 export const fetchDataWithLanguages = (languages?:string[]) => {
