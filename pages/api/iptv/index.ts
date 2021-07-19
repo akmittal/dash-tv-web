@@ -26,7 +26,8 @@ const HandleHome = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const url = `https://holy-wave-2608.fly.dev/channels?${params.toString()}`;
   const acceptEncoding =Array.isArray(req.headers["accept-encoding"])?req.headers["accept-encoding"][0]:req.headers["accept-encoding"];
-  const result = await fetch(url, {headers:{
+  const result = await fetch(url, {compress: false,headers:{
+    
     "accept-encoding":acceptEncoding??""
   }});
   const body = result.body;
