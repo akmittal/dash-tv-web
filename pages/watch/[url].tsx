@@ -82,6 +82,9 @@ export default function Watch({
           name="description"
           content={`Watch ${channel?.name} TV Channels live in HD quality`}
         />
+        <meta property="og:title" content={channel?.name+ "watch live Free - Dash TV"} />
+        <meta property="og:description" content={`Watch ${channel?.name} TV Channels live in HD quality`} />
+        <meta property="og:image" content={channel?.logo} />
       </Head>
 
       <video-js
