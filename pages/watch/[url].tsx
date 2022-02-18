@@ -100,7 +100,7 @@ export default function Watch({
       </video-js>
       <Flex gridGap="2">
         <img src={channel?.logo} alt={channel?.name} width="50" />
-        <h5>Watch {channel?.name} live Free</h5>
+        <Heading as="h1">Watch {channel?.name} live Free</Heading>
       </Flex>
       <VStack alignItems="flex-start">
         {channel?.category && (
@@ -156,6 +156,9 @@ const name = Array.isArray(ctx.query.url)?ctx.query.url[0]:ctx.query.url
 
  res.props.data = data;
 
-
+ ctx.res.setHeader(
+  'Cache-Control',
+  'public, s-maxage=60000, stale-while-revalidate=89900',
+);
   return res;
 };

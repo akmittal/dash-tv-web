@@ -67,7 +67,7 @@ export default function Home({ selectedLanguages=["English"], data:initialData }
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { selectedLanguages } = cookie(ctx);
+  const { selectedLanguages = "" } = cookie(ctx);
   const res: GetServerSidePropsResult<any>  = { props : {}}
 
    const json = await fetchDataWithLanguages(selectedLanguages);

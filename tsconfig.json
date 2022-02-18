@@ -6,7 +6,6 @@
       "dom.iterable",
       "esnext"
     ],
-  
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,11 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
-    "src","pages/api"
-, "pages/watch"  ],
+    "src",
+    "pages/api",
+    "pages/watch"
+  ],
   "exclude": [
     "node_modules"
   ]
